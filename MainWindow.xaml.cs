@@ -1,79 +1,83 @@
-﻿using Microsoft.Win32;
 using System;
-using System.Windows;
-using System.Windows.Interop;
-using System.Runtime.InteropServices;
-using System.Windows.Controls;
+using System.Threading.Tasks;
+using Avalonia.Controls;
+using Avalonia.Interactivity;
+using Microsoft.Win32;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 
 namespace OFGB
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         const string cur_ver = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\";
-
-        [DllImport("dwmapi.dll")]
-        internal static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, int[] attrValue, int attrSize);
 
         public MainWindow()
         {
             InitializeComponent();
 
-            IntPtr handle = new WindowInteropHelper(Application.Current.MainWindow).EnsureHandle();
-            if (DwmSetWindowAttribute(handle, 19, [1], 4) != 0)
-            {
-                DwmSetWindowAttribute(handle, 20, [1], 4);
-            }
+            var plfHandle = this.TryGetPlatformHandle()!;
+            IntPtr handle = plfHandle.Handle;
+            var currentStyle = NativeMethod.GetWindowLongPtrW(handle, NativeMethod.GWL_STYLE);
+            NativeMethod.SetWindowLongPtrW(handle, NativeMethod.GWL_STYLE, (currentStyle & ~NativeMethod.WS_MAXIMIZEBOX & ~NativeMethod.WS_MINIMIZEBOX));
 
-            InitializeKeys();
+            if (NativeMethod.DwmSetWindowAttribute(handle, 19, [1], 4) != 0)
+            {
+                NativeMethod.DwmSetWindowAttribute(handle, 20, [1], 4);
+            }
+            
+            this.Loaded += async (sender, e) => await InitializeKeys();
         }
 
-        private void InitializeKeys()
+        private void IsCheckedChanged(object? sender, RoutedEventArgs e)
+        {
+            ToggleOptions(((CheckBox)sender!).Name!, ((CheckBox)sender).IsChecked == true);
+        }
+
+        private async Task InitializeKeys()
         {
             // https://www.elevenforum.com/t/disable-ads-in-windows-11.8004/
             // Sync provider notifications in File Explorer
-            bool key1 = CreateKey(cur_ver + "Explorer\\Advanced", "ShowSyncProviderNotifications");
+            bool key1 = await CreateKeyAsync(cur_ver + "Explorer\\Advanced", "ShowSyncProviderNotifications");
             cb1.IsChecked = !key1;
 
             // Get fun facts, tips, tricks, and more on your lock screen
-            bool key2 = CreateKey(cur_ver + "ContentDeliveryManager", "RotatingLockScreenOverlayEnabled");
-            bool key3 = CreateKey(cur_ver + "ContentDeliveryManager", "SubscribedContent-338387Enabled");
+            bool key2 = await CreateKeyAsync(cur_ver + "ContentDeliveryManager", "RotatingLockScreenOverlayEnabled");
+            bool key3 = await CreateKeyAsync(cur_ver + "ContentDeliveryManager", "SubscribedContent-338387Enabled");
             cb2.IsChecked = !key2 && !key3;
 
             // Show suggested content in Settings app
-            bool key4 = CreateKey(cur_ver + "ContentDeliveryManager", "SubscribedContent-338393Enabled");
-            bool key5 = CreateKey(cur_ver + "ContentDeliveryManager", "SubscribedContent-353694Enabled");
-            bool key6 = CreateKey(cur_ver + "ContentDeliveryManager", "SubscribedContent-353696Enabled");
+            bool key4 = await CreateKeyAsync(cur_ver + "ContentDeliveryManager", "SubscribedContent-338393Enabled");
+            bool key5 = await CreateKeyAsync(cur_ver + "ContentDeliveryManager", "SubscribedContent-353694Enabled");
+            bool key6 = await CreateKeyAsync(cur_ver + "ContentDeliveryManager", "SubscribedContent-353696Enabled");
             cb3.IsChecked = !key4 && !key5 && !key6;
 
             // Get tips and suggestions when using Windows
-            bool key7 = CreateKey(cur_ver + "ContentDeliveryManager", "SubscribedContent-338389Enabled");
+            bool key7 = await CreateKeyAsync(cur_ver + "ContentDeliveryManager", "SubscribedContent-338389Enabled");
             cb4.IsChecked = !key7;
 
             // Suggest ways to get the most out of Windows and finish setting up this device
-            bool key8 = CreateKey(cur_ver + "UserProfileEngagement", "ScoobeSystemSettingEnabled");
+            bool key8 = await CreateKeyAsync(cur_ver + "UserProfileEngagement", "ScoobeSystemSettingEnabled");
             cb5.IsChecked = !key8;
 
             // Show me the Windows welcome experience after updates and occasionally when I sign in to highlight what's new and suggested
-            bool key9 = CreateKey(cur_ver + "ContentDeliveryManager", "SubscribedContent-310093Enabled");
+            bool key9 = await CreateKeyAsync(cur_ver + "ContentDeliveryManager", "SubscribedContent-310093Enabled");
             cb6.IsChecked = !key9;
 
             // Let apps show me personalized ads by using my advertising ID
-            bool key10 = CreateKey(cur_ver + "AdvertisingInfo", "Enabled");
+            bool key10 = await CreateKeyAsync(cur_ver + "AdvertisingInfo", "Enabled");
             cb7.IsChecked = !key10;
 
             // Tailored experiences
-            bool key11 = CreateKey(cur_ver + "Privacy", "TailoredExperiencesWithDiagnosticDataEnabled");
+            bool key11 = await CreateKeyAsync(cur_ver + "Privacy", "TailoredExperiencesWithDiagnosticDataEnabled");
             cb8.IsChecked = !key11;
 
             // "Show recommendations for tips, shortcuts, new apps, and more" on Start
-            bool key12 = CreateKey(cur_ver + "Explorer\\Advanced", "Start_IrisRecommendations");
+            bool key12 = await CreateKeyAsync(cur_ver + "Explorer\\Advanced", "Start_IrisRecommendations");
             cb9.IsChecked = !key12;
         }
 
-        private static bool CreateKey(string loc, string key)
+        private async Task<bool> CreateKeyAsync(string loc, string key)
         {
             if (Registry.CurrentUser.OpenSubKey(loc, true) is not null)
             {
@@ -91,7 +95,12 @@ namespace OFGB
                 }
                 else
                 {
-                    MessageBox.Show("Null KeyRef Used", "Fatal Error 1", MessageBoxButton.OK, MessageBoxImage.Error);
+                    await MessageBoxManager
+                        .GetMessageBoxStandard(
+                            "Null KeyRef Used",
+                            "Fatal Error 1",
+                            ButtonEnum.Ok,
+                            MsBox.Avalonia.Enums.Icon.Error).ShowAsync();
                     throw new InvalidOperationException("Null KeyRef Used While Creating Key");
                 }
             }
@@ -107,7 +116,12 @@ namespace OFGB
                 }
                 else
                 {
-                    MessageBox.Show("Null KeyRef Used", "Fatal Error 2", MessageBoxButton.OK, MessageBoxImage.Error);
+                    await MessageBoxManager
+                        .GetMessageBoxStandard(
+                            "Null KeyRef Used",
+                            "Fatal Error 2",
+                            ButtonEnum.Ok,
+                            MsBox.Avalonia.Enums.Icon.Error).ShowAsync();
                     throw new InvalidOperationException("Null KeyRef Used While Creating Key");
                 }
             }
@@ -151,16 +165,6 @@ namespace OFGB
                     break;
             }
             return true;
-        }
-
-        private void Checked(object sender, RoutedEventArgs e)
-        {
-            ToggleOptions(((CheckBox)sender).Name, true);
-        }
-
-        private void Unchecked(object sender, RoutedEventArgs e)
-        {
-            ToggleOptions(((CheckBox)sender).Name, false);
         }
     }
 }
