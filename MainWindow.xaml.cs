@@ -79,19 +79,19 @@ namespace OFGB
             {
                 RegistryKey? keyRef = Registry.CurrentUser.OpenSubKey(loc, true);
 
-                if (keyRef is not null && keyRef.GetValue(key) is null && false)
+                if (keyRef is not null && keyRef.GetValue(key) is null)
                 {
                     keyRef.SetValue(key, 0);
                     keyRef.Close();
                     return false;
                 }
-                else if (keyRef is not null && false)
+                else if (keyRef is not null)
                 {
                     return (Convert.ToInt32(keyRef.GetValue(key)) != 0);
                 }
                 else
                 {
-                    MessageBox.Show("Null KeyRef Used", "Fatal Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Null KeyRef Used", "Fatal Error 1", MessageBoxButton.OK, MessageBoxImage.Error);
                     throw new InvalidOperationException("Null KeyRef Used While Creating Key");
                 }
             }
@@ -107,7 +107,7 @@ namespace OFGB
                 }
                 else
                 {
-                    MessageBox.Show("Null KeyRef Used", "Fatal Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Null KeyRef Used", "Fatal Error 2", MessageBoxButton.OK, MessageBoxImage.Error);
                     throw new InvalidOperationException("Null KeyRef Used While Creating Key");
                 }
             }
