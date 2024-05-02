@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="OFGB - Version 0.1" Height="260" Width="240" Background="#202020">
+        Title="OFGB - Version 0.2" Height="260" Width="240" Background="#202020">
     <Grid>
         <CheckBox x:Name="cb1" Margin="5,0,0,0"   Checked="Checked" Unchecked="Unchecked" Content="Disable File Explorer Ads" />
         <CheckBox x:Name="cb2" Margin="5,20,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable Lock Screen Tips And Ads" />
