@@ -32,6 +32,7 @@ namespace OFGB
 
         private void InitializeKeys()
         {
+            // https://www.elevenforum.com/t/disable-ads-in-windows-11.8004/
             // Sync provider notifications in File Explorer
             bool key1 = CreateKey(cur_ver + "Explorer\\Advanced", "ShowSyncProviderNotifications");
             cb1.IsChecked = !key1;
@@ -117,34 +118,34 @@ namespace OFGB
             switch (name)
             {
                 case "cb1":
-                    Registry.CurrentUser.SetValue(cur_ver + "Explorer\\Advanced\\" + "ShowSyncProviderNotifications", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Explorer\\Advanced\\", "ShowSyncProviderNotifications", value);
                     break;
                 case "cb2":
-                    Registry.CurrentUser.SetValue(cur_ver + "ContentDeliveryManager" + "RotatingLockScreenOverlayEnabled", value);
-                    Registry.CurrentUser.SetValue(cur_ver + "ContentDeliveryManager" + "SubscribedContent-338387Enabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "RotatingLockScreenOverlayEnabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-338387Enabled", value);
                     break;
                 case "cb3":
-                    Registry.CurrentUser.SetValue(cur_ver + "ContentDeliveryManager" + "SubscribedContent-338393Enabled", value);
-                    Registry.CurrentUser.SetValue(cur_ver + "ContentDeliveryManager" + "SubscribedContent-353694Enabled", value);
-                    Registry.CurrentUser.SetValue(cur_ver + "ContentDeliveryManager" + "SubscribedContent-353696Enabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-338393Enabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-353694Enabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-353696Enabled", value);
                     break;
                 case "cb4":
-                    Registry.CurrentUser.SetValue(cur_ver + "ContentDeliveryManager" + "SubscribedContent-338389Enabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-338389Enabled", value);
                     break;
                 case "cb5":
-                    Registry.CurrentUser.SetValue(cur_ver + "UserProfileEngagement" + "ScoobeSystemSettingEnabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "UserProfileEngagement", "ScoobeSystemSettingEnabled", value);
                     break;
                 case "cb6":
-                    Registry.CurrentUser.SetValue(cur_ver + "ContentDeliveryManager" + "SubscribedContent-310093Enabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-310093Enabled", value);
                     break;
                 case "cb7":
-                    Registry.CurrentUser.SetValue(cur_ver + "AdvertisingInfo" + "Enabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "AdvertisingInfo", "Enabled", value);
                     break;
                 case "cb8":
-                    Registry.CurrentUser.SetValue(cur_ver + "Privacy" + "TailoredExperiencesWithDiagnosticDataEnabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Privacy", "TailoredExperiencesWithDiagnosticDataEnabled", value);
                     break;
                 case "cb9":
-                    Registry.CurrentUser.SetValue(cur_ver + "Explorer\\Advanced" + "Start_IrisRecommendations", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Explorer\\Advanced", "Start_IrisRecommendations", value);
                     break;
             }
             return true;
