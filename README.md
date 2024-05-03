@@ -7,11 +7,11 @@ GUI Tool To Removes Ads From Various Places Around Windows 11
 <br/>
 
 ## First Things First Credits:
-- [Registry Keys And Comments About Their Function](https://github.com/xM4ddy/OFGB/blob/92756276178137bb78d7c563733dde0d24f13aff/MainWindow.xaml.cs#L33) and Insperation For This Tool All Were From [Shawn Brink](https://www.elevenforum.com/members/brink.2/) And [His Wonderful Script](https://www.elevenforum.com/t/disable-ads-in-windows-11.8004/)
+- [Registry Keys And Comments About Their Function](https://github.com/xM4ddy/OFGB/blob/92756276178137bb78d7c563733dde0d24f13aff/MainWindow.xaml.cs#L33) and Inspiration For This Tool All Were From [Shawn Brink](https://www.elevenforum.com/members/brink.2/) And [His Wonderful Script](https://www.elevenforum.com/t/disable-ads-in-windows-11.8004/)
 - [Pretty Much All Of The Apps Theme](https://github.com/xM4ddy/OFGB/blob/main/dark.xaml) Is From A Super Cool Project Called [DarkNet](https://github.com/Aldaviva/DarkNet) By [Aldaviva](https://github.com/Aldaviva)
 
 ## What This Tool Does And How
-This tool uses changes to the [Windows Registry](https://en.wikipedia.org/wiki/Windows_Registry) to disable ads in various places around Windows. The tool is written in C# and uses [WPF](https://en.wikipedia.org/wiki/Windows_Presentation_Foundation).
+This tool uses changes to the [Windows Registry](https://en.wikipedia.org/wiki/Windows_Registry) to disable ads in various places around Windows 11. The tool is written in C# and uses [WPF](https://en.wikipedia.org/wiki/Windows_Presentation_Foundation).
 <br/>
 
 ## Building
