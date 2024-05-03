@@ -20,7 +20,7 @@ This tool uses changes to the [Windows Registry](https://en.wikipedia.org/wiki/W
 3) Build Project
 ## Where EXE?
 
-[Here EXE](https://github.com/xM4ddy/OFGB/releases/tag/Latest)
+[Here EXE](https://github.com/xM4ddy/OFGB/releases/latest)
 
 ## Other Notes
 Sorry It Took Me So Long To Get To The README Done I had College Work Yesterday <3
