@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Runtime.InteropServices;
 using System.Windows.Controls;
+using System.Security.Principal;
+
 
 namespace OFGB
 {
@@ -25,6 +27,12 @@ namespace OFGB
             if (DwmSetWindowAttribute(handle, 19, [1], 4) != 0)
             {
                 DwmSetWindowAttribute(handle, 20, [1], 4);
+            }
+
+            if(!IsAdministrator())
+            {
+                MessageBox.Show("This application requires administrator privileges to run correctly.",
+                        "Administrator Rights Required");
             }
 
             InitializeKeys();
@@ -71,6 +79,12 @@ namespace OFGB
             // "Show recommendations for tips, shortcuts, new apps, and more" on Start
             bool key12 = CreateKey(cur_ver + "Explorer\\Advanced", "Start_IrisRecommendations");
             cb9.IsChecked = !key12;
+
+            //Show web search results in Search, show Bing search results in Search
+            bool key13 = CreateKey("HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows", "DisableSearchBoxSuggestions");
+            bool key14 = CreateKey(cur_ver + "Search", "BingSearchEnabled");
+            cb10.IsChecked = key13 && !key14;
+
         }
 
         private static bool CreateKey(string loc, string key)
@@ -149,6 +163,11 @@ namespace OFGB
                 case "cb9":
                     Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Explorer\\Advanced", "Start_IrisRecommendations", value);
                     break;
+                case "cb10":
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Search", "BingSearchEnabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows", "DisableSearchBoxSuggestions", enable==true?1:0);
+                    break;
+
             }
             return true;
         }
@@ -161,6 +180,17 @@ namespace OFGB
         private void Unchecked(object sender, RoutedEventArgs e)
         {
             ToggleOptions(((CheckBox)sender).Name, false);
+        }
+
+        /// <summary>
+        /// This function check program run as admin or not
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsAdministrator()
+        {
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
     }
 }
