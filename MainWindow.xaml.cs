@@ -10,24 +10,61 @@ namespace OFGB
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct AccentPolicy
+    {
+        public uint AccentState;
+        public uint AccentFlags;
+        public uint GradientColor;
+        public uint AnimationId;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal struct WindowCompositionAttributeData
+    {
+        public int Attribute;
+        public IntPtr Data;
+        public int SizeOfData;
+    }
+
     public partial class MainWindow : Window
     {
-        const string cur_ver = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\";
-
+        [DllImport("user32.dll")]
+        internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
         [DllImport("dwmapi.dll")]
         internal static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, int[] attrValue, int attrSize);
+
+        const string cur_ver = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\";
 
         public MainWindow()
         {
             InitializeComponent();
-
-            IntPtr handle = new WindowInteropHelper(Application.Current.MainWindow).EnsureHandle();
-            if (DwmSetWindowAttribute(handle, 19, [1], 4) != 0)
-            {
-                DwmSetWindowAttribute(handle, 20, [1], 4);
-            }
-
             InitializeKeys();
+        }
+
+        internal void EnableBlur(object? sender, EventArgs? e)
+        {
+            var accent = new AccentPolicy()
+            {
+                AccentFlags = 2,
+                AccentState = 4,
+                GradientColor = 0x00000055
+            };
+
+            var accentPtr = Marshal.AllocHGlobal(Marshal.SizeOf(accent));
+            Marshal.StructureToPtr(accent, accentPtr, false);
+
+            var data = new WindowCompositionAttributeData()
+            {
+                Attribute = 19,
+                SizeOfData = Marshal.SizeOf(accent),
+                Data = accentPtr,
+            };
+
+            SetWindowCompositionAttribute((new WindowInteropHelper(this)).Handle, ref data);
+            DwmSetWindowAttribute(new WindowInteropHelper(this).Handle, 33, [2], sizeof(int));
+            Marshal.FreeHGlobal(accentPtr);
         }
 
         private void InitializeKeys()
@@ -161,6 +198,11 @@ namespace OFGB
         private void Unchecked(object sender, RoutedEventArgs e)
         {
             ToggleOptions(((CheckBox)sender).Name, false);
+        }
+
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

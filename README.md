@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.ibb.co/P4yXfXn/ofgbF.png" alt="screenshot of OFGB" />
+  <img src="https://i.ibb.co/Mnsxwtc/ofgbv03.png" alt="screenshot of OFGB" />
 </p>
 
 # OFGB (Oh Frick Go Back)
@@ -23,6 +23,6 @@ This tool uses changes to the [Windows Registry](https://en.wikipedia.org/wiki/W
 [Here EXE](https://github.com/xM4ddy/OFGB/releases/latest)
 
 ## Other Notes
-Sorry It Took Me So Long To Get To The README Done I had College Work Yesterday <3
-
 If you find any bugs it would be very cash money of you to make an issue!
+
+Want to avoid all this mess? Try Linux!

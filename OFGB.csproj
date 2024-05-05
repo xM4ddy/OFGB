@@ -5,13 +5,22 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
-    <ApplicationIcon>ico.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\ico.ico</ApplicationIcon>
 	<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 	<SelfContained>true</SelfContained>
 	<DebugType>None</DebugType>
 	<DebugSymbols>False</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="ico.ico" />
+    <None Remove="Assets\OFGB.png" />
+    <None Remove="ofgb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\ico.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\OFGB.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 </Project>

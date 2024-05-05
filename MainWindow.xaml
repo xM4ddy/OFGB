@@ -4,19 +4,88 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
+        Background="#01FFFFFF"
+        Loaded="EnableBlur"
         ResizeMode="NoResize"
-        Title="OFGB - Version 0.2" Height="260" Width="240" Background="#202020">
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Title="OFGB - Version 0.2" Height="250" Width="235">
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            CaptionHeight="30"
+            CornerRadius="0"
+            GlassFrameThickness="0"
+            UseAeroCaptionButtons="False" />
+    </WindowChrome.WindowChrome>
     <Grid>
-        <CheckBox x:Name="cb1" Margin="5,0,0,0"   Checked="Checked" Unchecked="Unchecked" Content="Disable File Explorer Ads" />
-        <CheckBox x:Name="cb2" Margin="5,20,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable Lock Screen Tips And Ads" />
-        <CheckBox x:Name="cb3" Margin="5,40,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable Settings Ads" />
-        <CheckBox x:Name="cb4" Margin="5,60,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable General Tips And Ads" />
-        <CheckBox x:Name="cb5" Margin="5,80,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Finish Setup&quot; Ads" />
-        <CheckBox x:Name="cb6" Margin="5,100,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Welcome Experience&quot; Ads" />
-        <CheckBox x:Name="cb7" Margin="5,120,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Personalized Ads" />
-        <CheckBox x:Name="cb8" Margin="5,140,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Tailored Experiences&quot;" />
-        <CheckBox x:Name="cb9" Margin="5,160,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Start Menu Ads" />
+        <Image Source="/Assets/OFGB.png" SnapsToDevicePixels="True" Panel.ZIndex="1" Margin="12,6,0,0" Height="16" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <Button Content="&#xe8bb;" FontSize="10" Panel.ZIndex="1" Width="40" Click="Close" Height="30" WindowChrome.IsHitTestVisibleInChrome="True" />
 
-        <TextBlock Foreground="#FFAAAA" Width="210" Margin="7,180,0,0" TextWrapping="Wrap" Text="* You May Need To Restart For Changes To Apply"/>
+        <CheckBox x:Name="cb1" Margin="12,30,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable File Explorer Ads" />
+        <CheckBox x:Name="cb2" Margin="12,50,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable Lock Screen Tips And Ads" />
+        <CheckBox x:Name="cb3" Margin="12,70,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable Settings Ads" />
+        <CheckBox x:Name="cb4" Margin="12,90,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable General Tips And Ads" />
+        <CheckBox x:Name="cb5" Margin="12,110,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Finish Setup&quot; Ads" />
+        <CheckBox x:Name="cb6" Margin="12,130,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Welcome Experience&quot; Ads" />
+        <CheckBox x:Name="cb7" Margin="12,150,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Personalized Ads" />
+        <CheckBox x:Name="cb8" Margin="12,170,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Tailored Experiences&quot;" />
+        <CheckBox x:Name="cb9" Margin="12,190,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Start Menu Ads" />
+
+        <TextBlock Foreground="Gray" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Bottom" TextAlignment="Left" Margin="0,0,8,5" TextWrapping="Wrap" Text="V0.3"/>
+        <TextBlock Foreground="#FFAAAA" Width="210" Margin="13,210,0,0" TextWrapping="Wrap" Text="* You May Need To Restart For Changes To Apply"/>
+
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left" Width="10" Margin="0,0,0,0" Height="250">
+            <Rectangle Width="10" Height="50">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0.0,0.0" EndPoint="1.0,0.0">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0.8" Color="#00000000"/>
+                            <GradientStop Offset="0.0" Color="LightBlue"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Width="10" Height="50">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0.0,0.0" EndPoint="1.0,0.0">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0.8" Color="#00000000"/>
+                            <GradientStop Offset="0.0" Color="Pink"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Width="10" Height="50">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0.0,0.0" EndPoint="1.0,0.0">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0.8" Color="#00000000"/>
+                            <GradientStop Offset="0.0" Color="White"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Width="10" Height="50">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0.0,0.0" EndPoint="1.0,0.0">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0.8" Color="#00000000"/>
+                            <GradientStop Offset="0.0" Color="Pink"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Width="10" Height="50">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0.0,0.0" EndPoint="1.0,0.0">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0.8" Color="#00000000"/>
+                            <GradientStop Offset="0.0" Color="LightBlue"/>
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </StackPanel>
     </Grid>
 </Window>
