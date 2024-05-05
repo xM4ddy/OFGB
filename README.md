@@ -22,7 +22,11 @@ This tool uses changes to the [Windows Registry](https://en.wikipedia.org/wiki/W
 
 [Here EXE](https://github.com/xM4ddy/OFGB/releases/latest)
 
-## Other Notes
+## Issues
 If you find any bugs it would be very cash money of you to make an issue!
 
-Want to avoid all this mess? Try Linux!
+## Want To Add More?
+[Come Join The GitHub Discussion!](https://github.com/xM4ddy/OFGB/discussions/15) Here we discuss new keys to be added! 
+
+## Other Notes
+Psst, Want to avoid all this mess? Try Linux!
