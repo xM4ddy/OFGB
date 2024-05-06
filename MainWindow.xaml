@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OFGB"
         mc:Ignorable="d"
         Background="#01FFFFFF"
         Loaded="EnableBlur"
@@ -22,18 +23,18 @@
         <Image Source="/Assets/OFGB.png" SnapsToDevicePixels="True" Panel.ZIndex="1" Margin="12,6,0,0" Height="16" VerticalAlignment="Top" HorizontalAlignment="Left" />
         <Button Content="&#xe8bb;" FontSize="10" Panel.ZIndex="1" Width="40" Click="Close" Height="30" WindowChrome.IsHitTestVisibleInChrome="True" />
 
-        <CheckBox x:Name="cb1" Margin="12,30,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable File Explorer Ads" />
-        <CheckBox x:Name="cb2" Margin="12,50,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable Lock Screen Tips And Ads" />
-        <CheckBox x:Name="cb3" Margin="12,70,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable Settings Ads" />
-        <CheckBox x:Name="cb4" Margin="12,90,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable General Tips And Ads" />
-        <CheckBox x:Name="cb5" Margin="12,110,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Finish Setup&quot; Ads" />
-        <CheckBox x:Name="cb6" Margin="12,130,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Welcome Experience&quot; Ads" />
-        <CheckBox x:Name="cb7" Margin="12,150,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Personalized Ads" />
-        <CheckBox x:Name="cb8" Margin="12,170,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Tailored Experiences&quot;" />
-        <CheckBox x:Name="cb9" Margin="12,190,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Start Menu Ads" />
+        <CheckBox x:Name="cb1" Margin="12,30,0,0"  Checked="Checked" Unchecked="Unchecked" Content="{Binding [disableFileExplorer], Source={x:Static local:I18n.Instance}}" />
+        <CheckBox x:Name="cb2" Margin="12,50,0,0"  Checked="Checked" Unchecked="Unchecked" Content="{Binding [disableFinishSetup], Source={x:Static local:I18n.Instance}}" />
+        <CheckBox x:Name="cb3" Margin="12,70,0,0"  Checked="Checked" Unchecked="Unchecked" Content="{Binding [disableGeneral], Source={x:Static local:I18n.Instance}}" />
+        <CheckBox x:Name="cb4" Margin="12,90,0,0"  Checked="Checked" Unchecked="Unchecked" Content="{Binding [disableLockScreen], Source={x:Static local:I18n.Instance}}" />
+        <CheckBox x:Name="cb5" Margin="12,110,0,0" Checked="Checked" Unchecked="Unchecked" Content="{Binding [disablePersonalized], Source={x:Static local:I18n.Instance}}" />
+        <CheckBox x:Name="cb6" Margin="12,130,0,0" Checked="Checked" Unchecked="Unchecked" Content="{Binding [disableSettings], Source={x:Static local:I18n.Instance}}" />
+        <CheckBox x:Name="cb7" Margin="12,150,0,0" Checked="Checked" Unchecked="Unchecked" Content="{Binding [disableStartMenu], Source={x:Static local:I18n.Instance}}" />
+        <CheckBox x:Name="cb8" Margin="12,170,0,0" Checked="Checked" Unchecked="Unchecked" Content="{Binding [disableTailoredExperience], Source={x:Static local:I18n.Instance}}" />
+        <CheckBox x:Name="cb9" Margin="12,190,0,0" Checked="Checked" Unchecked="Unchecked" Content="{Binding [disableWelcomeExperience], Source={x:Static local:I18n.Instance}}" />
 
         <TextBlock Foreground="Gray" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Bottom" TextAlignment="Left" Margin="0,0,8,5" TextWrapping="Wrap" Text="V0.3"/>
-        <TextBlock Foreground="#FFAAAA" Width="210" Margin="13,210,0,0" TextWrapping="Wrap" Text="* You May Need To Restart For Changes To Apply"/>
+        <TextBlock Foreground="#FFAAAA" Width="210" Margin="13,210,0,0" TextWrapping="Wrap" Text="{Binding [restartForChanges], Source={x:Static local:I18n.Instance}}"/>
 
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left" Width="10" Margin="0,0,0,0" Height="250">
             <Rectangle Width="10" Height="50">

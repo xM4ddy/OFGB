@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Runtime.InteropServices;
 using System.Windows.Controls;
+using System.Globalization;
 
 namespace OFGB
 {
@@ -39,6 +40,7 @@ namespace OFGB
 
         public MainWindow()
         {
+            I18n.Instance.ApplyLanguage(new CultureInfo("zh-CN"));
             InitializeComponent();
             InitializeKeys();
         }
