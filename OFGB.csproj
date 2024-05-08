@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
-    <ApplicationIcon>Assets\ico.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
 	<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 	<SelfContained>true</SelfContained>
 	<DebugType>None</DebugType>
@@ -16,7 +16,7 @@
     <None Remove="ofgb.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\ico.ico" />
+    <Content Include="Assets\icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\OFGB.png">

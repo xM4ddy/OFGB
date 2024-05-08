@@ -23,17 +23,17 @@
         <Button Content="&#xe8bb;" FontSize="10" Panel.ZIndex="1" Width="40" Click="Close" Height="30" WindowChrome.IsHitTestVisibleInChrome="True" />
 
         <CheckBox x:Name="cb1" Margin="12,30,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable File Explorer Ads" />
-        <CheckBox x:Name="cb2" Margin="12,50,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable Lock Screen Tips And Ads" />
+        <CheckBox x:Name="cb2" Margin="12,50,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable Lock Screen Tips and Ads" />
         <CheckBox x:Name="cb3" Margin="12,70,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable Settings Ads" />
-        <CheckBox x:Name="cb4" Margin="12,90,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable General Tips And Ads" />
+        <CheckBox x:Name="cb4" Margin="12,90,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable General Tips and Ads" />
         <CheckBox x:Name="cb5" Margin="12,110,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Finish Setup&quot; Ads" />
         <CheckBox x:Name="cb6" Margin="12,130,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Welcome Experience&quot; Ads" />
         <CheckBox x:Name="cb7" Margin="12,150,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Personalized Ads" />
         <CheckBox x:Name="cb8" Margin="12,170,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Tailored Experiences&quot;" />
         <CheckBox x:Name="cb9" Margin="12,190,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Start Menu Ads" />
 
-        <TextBlock Foreground="Gray" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Bottom" TextAlignment="Left" Margin="0,0,8,5" TextWrapping="Wrap" Text="V0.3"/>
-        <TextBlock Foreground="#FFAAAA" Width="210" Margin="13,210,0,0" TextWrapping="Wrap" Text="* You May Need To Restart For Changes To Apply"/>
+        <TextBlock Foreground="Gray" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Bottom" TextAlignment="Left" Margin="0,0,8,5" TextWrapping="Wrap" Text="v0.3"/>
+        <TextBlock Foreground="#FFAAAA" Width="210" Margin="13,210,0,0" TextWrapping="Wrap" Text="*You may need to restart your PC for changes to apply!"/>
 
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left" Width="10" Margin="0,0,0,0" Height="250">
             <Rectangle Width="10" Height="50">

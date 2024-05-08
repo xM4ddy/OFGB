@@ -126,11 +126,6 @@ namespace OFGB
                 {
                     return (Convert.ToInt32(keyRef.GetValue(key)) != 0);
                 }
-                else
-                {
-                    MessageBox.Show("Null KeyRef Used", "Fatal Error 1", MessageBoxButton.OK, MessageBoxImage.Error);
-                    throw new InvalidOperationException("Null KeyRef Used While Creating Key");
-                }
             }
             else
             {
@@ -144,8 +139,8 @@ namespace OFGB
                 }
                 else
                 {
-                    MessageBox.Show("Null KeyRef Used", "Fatal Error 2", MessageBoxButton.OK, MessageBoxImage.Error);
-                    throw new InvalidOperationException("Null KeyRef Used While Creating Key");
+                    MessageBox.Show("Failed to create a registry subkey!", "Fatal Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    throw new InvalidOperationException("Failed to create subkey.");
                 }
             }
         }
