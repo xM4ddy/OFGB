@@ -40,7 +40,6 @@ namespace OFGB
 
         public MainWindow()
         {
-            I18n.Instance.ApplyLanguage(new CultureInfo("zh-CN"));
             InitializeComponent();
             InitializeKeys();
         }
