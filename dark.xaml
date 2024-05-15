@@ -1,8 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!--https://github.com/Aldaviva/DarkNet/blob/master/darknet-demo-wpf/Skins/Skin.Dark.xaml-->
-
     <Style x:Key="labelStyleCommon" TargetType="Label">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />

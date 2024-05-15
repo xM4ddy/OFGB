@@ -10,6 +10,7 @@
 	<SelfContained>true</SelfContained>
 	<DebugType>None</DebugType>
 	<DebugSymbols>False</DebugSymbols>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\OFGB.png" />

@@ -11,31 +11,30 @@ namespace OFGB
     /// Interaction logic for MainWindow.xaml
     /// </summary>
 
-    [StructLayout(LayoutKind.Sequential)]
-    internal struct AccentPolicy
-    {
-        public uint AccentState;
-        public uint AccentFlags;
-        public uint GradientColor;
-        public uint AnimationId;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    internal struct WindowCompositionAttributeData
-    {
-        public int Attribute;
-        public IntPtr Data;
-        public int SizeOfData;
-    }
-
     public partial class MainWindow : Window
     {
-        [DllImport("user32.dll")]
-        internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
-        [DllImport("dwmapi.dll")]
-        internal static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, int[] attrValue, int attrSize);
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct AccentPolicy
+        {
+            public uint AccentState;
+            public uint AccentFlags;
+            public uint GradientColor;
+            public uint AnimationId;
+        }
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct WindowCompositionAttributeData
+        {
+            public int Attribute;
+            public IntPtr Data;
+            public int SizeOfData;
+        }
 
-        const string cur_ver = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\";
+        [LibraryImport("user32.dll", EntryPoint = "SetWindowCompositionAttribute")]
+        internal static partial int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
+        [LibraryImport("dwmapi.dll", EntryPoint = "DwmSetWindowAttribute")]
+        internal static partial int DwmSetWindowAttribute(IntPtr hwnd, int attr, [In] int[] attrValue, int attrSize);
+
+        const string cur_ver = "Software\\Microsoft\\Windows\\CurrentVersion\\";
 
         public MainWindow()
         {
@@ -69,7 +68,6 @@ namespace OFGB
 
         private void InitializeKeys()
         {
-            // https://www.elevenforum.com/t/disable-ads-in-windows-11.8004/
             // Sync provider notifications in File Explorer
             bool key1 = CreateKey(cur_ver + "Explorer\\Advanced", "ShowSyncProviderNotifications");
             cb1.IsChecked = !key1;
@@ -112,44 +110,36 @@ namespace OFGB
 
         private static bool CreateKey(string loc, string key)
         {
+            RegistryKey? keyRef;
+            int value;
+
             if (Registry.CurrentUser.OpenSubKey(loc, true) is not null)
             {
-                RegistryKey? keyRef = Registry.CurrentUser.OpenSubKey(loc, true);
-
-                if (keyRef is not null && keyRef.GetValue(key) is null)
-                {
-                    keyRef.SetValue(key, 0);
-                    keyRef.Close();
-                    return false;
-                }
-                else if (keyRef is not null)
-                {
-                    return (Convert.ToInt32(keyRef.GetValue(key)) != 0);
-                }
+                keyRef = Registry.CurrentUser.OpenSubKey(loc, true);
             }
             else
             {
-                RegistryKey? keyRef = Registry.CurrentUser.CreateSubKey(loc);
-
-                if (keyRef is not null)
-                {
-                    keyRef.SetValue(key, 0);
-                    keyRef.Close();
-                    return false;
-                }
-                else
-                {
-                    MessageBox.Show("Failed to create a registry subkey!", "Fatal Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    throw new InvalidOperationException("Failed to create subkey.");
-                }
+                keyRef = Registry.CurrentUser.CreateSubKey(loc);
+                keyRef.SetValue(key, 0);
             }
+
+            if (keyRef is null)
+            {
+                MessageBox.Show("Failed to create a registry subkey during initialization!", "OFGB: Fatal Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw new InvalidOperationException("OFGB: Failed to create subkey during initialization!");
+            }
+
+            value = Convert.ToInt32(keyRef.GetValue(key));
+            keyRef.Close();
+
+            return (value != 0);
         }
 
-        private static bool ToggleOptions(string name, bool enable)
+        private static void ToggleOptions(string checkboxName, bool enable)
         {
             int value = Convert.ToInt32(!enable);
 
-            switch (name)
+            switch (checkboxName)
             {
                 case "cb1":
                     Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Explorer\\Advanced\\", "ShowSyncProviderNotifications", value);
@@ -182,7 +172,6 @@ namespace OFGB
                     Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Explorer\\Advanced", "Start_IrisRecommendations", value);
                     break;
             }
-            return true;
         }
 
         private void Checked(object sender, RoutedEventArgs e)
