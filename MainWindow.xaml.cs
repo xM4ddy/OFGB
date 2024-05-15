@@ -70,42 +70,42 @@ namespace OFGB
         {
             // Sync provider notifications in File Explorer
             bool key1 = CreateKey(cur_ver + "Explorer\\Advanced", "ShowSyncProviderNotifications");
-            cb1.IsChecked = !key1;
+            cb1.IsChecked = key1;
 
             // Get fun facts, tips, tricks, and more on your lock screen
             bool key2 = CreateKey(cur_ver + "ContentDeliveryManager", "RotatingLockScreenOverlayEnabled");
             bool key3 = CreateKey(cur_ver + "ContentDeliveryManager", "SubscribedContent-338387Enabled");
-            cb2.IsChecked = !key2 && !key3;
+            cb2.IsChecked = key2 && key3;
 
             // Show suggested content in Settings app
             bool key4 = CreateKey(cur_ver + "ContentDeliveryManager", "SubscribedContent-338393Enabled");
             bool key5 = CreateKey(cur_ver + "ContentDeliveryManager", "SubscribedContent-353694Enabled");
             bool key6 = CreateKey(cur_ver + "ContentDeliveryManager", "SubscribedContent-353696Enabled");
-            cb3.IsChecked = !key4 && !key5 && !key6;
+            cb3.IsChecked = key4 && key5 && key6;
 
             // Get tips and suggestions when using Windows
             bool key7 = CreateKey(cur_ver + "ContentDeliveryManager", "SubscribedContent-338389Enabled");
-            cb4.IsChecked = !key7;
+            cb4.IsChecked = key7;
 
             // Suggest ways to get the most out of Windows and finish setting up this device
             bool key8 = CreateKey(cur_ver + "UserProfileEngagement", "ScoobeSystemSettingEnabled");
-            cb5.IsChecked = !key8;
+            cb5.IsChecked = key8;
 
             // Show me the Windows welcome experience after updates and occasionally when I sign in to highlight what's new and suggested
             bool key9 = CreateKey(cur_ver + "ContentDeliveryManager", "SubscribedContent-310093Enabled");
-            cb6.IsChecked = !key9;
+            cb6.IsChecked = key9;
 
             // Let apps show me personalized ads by using my advertising ID
             bool key10 = CreateKey(cur_ver + "AdvertisingInfo", "Enabled");
-            cb7.IsChecked = !key10;
+            cb7.IsChecked = key10;
 
             // Tailored experiences
             bool key11 = CreateKey(cur_ver + "Privacy", "TailoredExperiencesWithDiagnosticDataEnabled");
-            cb8.IsChecked = !key11;
+            cb8.IsChecked = key11;
 
             // "Show recommendations for tips, shortcuts, new apps, and more" on Start
             bool key12 = CreateKey(cur_ver + "Explorer\\Advanced", "Start_IrisRecommendations");
-            cb9.IsChecked = !key12;
+            cb9.IsChecked = key12;
         }
 
         private static bool CreateKey(string loc, string key)
@@ -132,7 +132,7 @@ namespace OFGB
             value = Convert.ToInt32(keyRef.GetValue(key));
             keyRef.Close();
 
-            return (value != 0);
+            return !(value != 0);
         }
 
         private static void ToggleOptions(string checkboxName, bool enable)

@@ -10,7 +10,8 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
-        Title="OFGB - Version 0.2" Height="250" Width="235">
+        Title="OFGB - Version 0.2"
+        SizeToContent="WidthAndHeight">
     <WindowChrome.WindowChrome>
         <WindowChrome
             CaptionHeight="30"
