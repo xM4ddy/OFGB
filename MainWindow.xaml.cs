@@ -78,10 +78,10 @@ namespace OFGB
                 // Show Bing Results in Windows Search (Inverted, 1 == Disabled)
                 bool key14 = CreateKey("Software\\Policies\\Microsoft\\Windows\\Explorer", "DisableSearchBoxSuggestions");
                 bool key15 = CreateKey(cur_ver + "Search", "BingSearchEnabled");
-                cb11.IsChecked = key14 && key15;
+                cb11.IsChecked = !key14 && key15;
 
                 // Disable Edge desktop search widget bar
-                bool key16 = CreateKey("HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Edge", "WebWidgetAllowed");
+                bool key16 = CreateKey("Software\\Policies\\Microsoft\\Edge", "WebWidgetAllowed");
                 cb12.IsChecked = key16;
             }
             else
