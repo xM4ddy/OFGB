@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://i.ibb.co/Mnsxwtc/ofgbv03.png" alt="A screenshot of OFGB"/>
+    <img src="https://i.ibb.co/ZYgBD06/ofgbF.png" alt="A screenshot of OFGB"/>
 </p>
 
 # OFGB (Oh Frick Go Back)
