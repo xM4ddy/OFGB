@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Runtime.InteropServices;
 using System.Windows.Controls;
+using System.Security.Principal;
 
 namespace OFGB
 {
@@ -13,24 +14,6 @@ namespace OFGB
 
     public partial class MainWindow : Window
     {
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct AccentPolicy
-        {
-            public uint AccentState;
-            public uint AccentFlags;
-            public uint GradientColor;
-            public uint AnimationId;
-        }
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct WindowCompositionAttributeData
-        {
-            public int Attribute;
-            public IntPtr Data;
-            public int SizeOfData;
-        }
-
-        [LibraryImport("user32.dll", EntryPoint = "SetWindowCompositionAttribute")]
-        internal static partial int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
         [LibraryImport("dwmapi.dll", EntryPoint = "DwmSetWindowAttribute")]
         internal static partial int DwmSetWindowAttribute(IntPtr hwnd, int attr, [In] int[] attrValue, int attrSize);
 
@@ -40,30 +23,8 @@ namespace OFGB
         {
             InitializeComponent();
             InitializeKeys();
-        }
 
-        internal void EnableBlur(object? sender, EventArgs? e)
-        {
-            var accent = new AccentPolicy()
-            {
-                AccentFlags = 2,
-                AccentState = 4,
-                GradientColor = 0x00000055
-            };
-
-            var accentPtr = Marshal.AllocHGlobal(Marshal.SizeOf(accent));
-            Marshal.StructureToPtr(accent, accentPtr, false);
-
-            var data = new WindowCompositionAttributeData()
-            {
-                Attribute = 19,
-                SizeOfData = Marshal.SizeOf(accent),
-                Data = accentPtr,
-            };
-
-            SetWindowCompositionAttribute((new WindowInteropHelper(this)).Handle, ref data);
-            DwmSetWindowAttribute(new WindowInteropHelper(this).Handle, 33, [2], sizeof(int));
-            Marshal.FreeHGlobal(accentPtr);
+            DwmSetWindowAttribute(new WindowInteropHelper(Application.Current.MainWindow).EnsureHandle(), 33, [2], sizeof(int));
         }
 
         private void InitializeKeys()
@@ -106,6 +67,28 @@ namespace OFGB
             // "Show recommendations for tips, shortcuts, new apps, and more" on Start
             bool key12 = CreateKey(cur_ver + "Explorer\\Advanced", "Start_IrisRecommendations");
             cb9.IsChecked = key12;
+
+            // "Turn off notifications from <app>? We noticed you haven't opened these in a while."
+            bool key13 = CreateKey(cur_ver + "Notifications\\Settings\\Windows.ActionCenter.SmartOptOut", "Enabled");
+            cb10.IsChecked = key13;
+
+            // These Need To Be Run As Administrator
+            if (IsRunningAsAdministrator())
+            {
+                // Show Bing Results in Windows Search (Inverted, 1 == Disabled)
+                bool key14 = CreateKey("Software\\Policies\\Microsoft\\Windows\\Explorer", "DisableSearchBoxSuggestions");
+                bool key15 = CreateKey(cur_ver + "Search", "BingSearchEnabled");
+                cb11.IsChecked = key14 && key15;
+
+                // Disable Edge desktop search widget bar
+                bool key16 = CreateKey("HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Edge", "WebWidgetAllowed");
+                cb12.IsChecked = key16;
+            }
+            else
+            {
+                cb11.IsEnabled = false;
+                cb12.IsEnabled = false;
+            }
         }
 
         private static bool CreateKey(string loc, string key)
@@ -142,36 +125,51 @@ namespace OFGB
             switch (checkboxName)
             {
                 case "cb1":
-                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Explorer\\Advanced\\", "ShowSyncProviderNotifications", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Explorer\\Advanced\\", "ShowSyncProviderNotifications", Convert.ToInt32(!enable));
                     break;
                 case "cb2":
-                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "RotatingLockScreenOverlayEnabled", value);
-                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-338387Enabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "RotatingLockScreenOverlayEnabled", Convert.ToInt32(!enable));
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-338387Enabled", Convert.ToInt32(!enable));
                     break;
                 case "cb3":
-                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-338393Enabled", value);
-                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-353694Enabled", value);
-                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-353696Enabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-338393Enabled", Convert.ToInt32(!enable));
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-353694Enabled", Convert.ToInt32(!enable));
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-353696Enabled", Convert.ToInt32(!enable));
                     break;
                 case "cb4":
-                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-338389Enabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-338389Enabled", Convert.ToInt32(!enable));
                     break;
                 case "cb5":
-                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "UserProfileEngagement", "ScoobeSystemSettingEnabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "UserProfileEngagement", "ScoobeSystemSettingEnabled", Convert.ToInt32(!enable));
                     break;
                 case "cb6":
-                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-310093Enabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "ContentDeliveryManager", "SubscribedContent-310093Enabled", Convert.ToInt32(!enable));
                     break;
                 case "cb7":
-                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "AdvertisingInfo", "Enabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "AdvertisingInfo", "Enabled", Convert.ToInt32(!enable));
                     break;
                 case "cb8":
-                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Privacy", "TailoredExperiencesWithDiagnosticDataEnabled", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Privacy", "TailoredExperiencesWithDiagnosticDataEnabled", Convert.ToInt32(!enable));
                     break;
                 case "cb9":
-                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Explorer\\Advanced", "Start_IrisRecommendations", value);
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Explorer\\Advanced", "Start_IrisRecommendations", Convert.ToInt32(!enable));
+                    break;
+                case "cb10":
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Notifications\\Settings\\Windows.ActionCenter.SmartOptOut", "Enabled", Convert.ToInt32(!enable));
+                    break;
+                case "cb11":
+                    Registry.SetValue("HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows\\Explorer", "DisableSearchBoxSuggestions", Convert.ToInt32(enable)); // Inverted
+                    Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Search", "BingSearchEnabled", Convert.ToInt32(!enable));
+                    break;
+                case "cb12":
+                    Registry.SetValue("HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Edge", "WebWidgetAllowed", Convert.ToInt32(!enable));
                     break;
             }
+        }
+
+        public static bool IsRunningAsAdministrator()
+        {
+            return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
         }
 
         private void Checked(object sender, RoutedEventArgs e)

@@ -4,89 +4,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Background="#01FFFFFF"
-        Loaded="EnableBlur"
+        Background="#1E1E2E"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        AllowsTransparency="True"
-        Title="OFGB - Version 0.2"
+        Title="OFGB"
         SizeToContent="WidthAndHeight">
     <WindowChrome.WindowChrome>
         <WindowChrome
-            CaptionHeight="30"
+            CaptionHeight="32"
             CornerRadius="0"
             GlassFrameThickness="0"
             UseAeroCaptionButtons="False" />
     </WindowChrome.WindowChrome>
     <Grid>
-        <Image Source="/Assets/OFGB.png" SnapsToDevicePixels="True" Panel.ZIndex="1" Margin="12,6,0,0" Height="16" VerticalAlignment="Top" HorizontalAlignment="Left" />
-        <Button Content="&#xe8bb;" FontSize="10" Panel.ZIndex="1" Width="40" Click="Close" Height="30" WindowChrome.IsHitTestVisibleInChrome="True" />
+        <Image Source="/Assets/OFGB.png" SnapsToDevicePixels="True" Panel.ZIndex="1" Margin="8,8,0,0" Height="16" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <Button Content="&#xe8bb;" x:Name="close" FontSize="10" Panel.ZIndex="1" Width="40" Click="Close" Height="32" WindowChrome.IsHitTestVisibleInChrome="True" />
 
-        <CheckBox x:Name="cb1" Margin="12,30,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable File Explorer Ads" />
-        <CheckBox x:Name="cb2" Margin="12,50,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable Lock Screen Tips and Ads" />
-        <CheckBox x:Name="cb3" Margin="12,70,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable Settings Ads" />
-        <CheckBox x:Name="cb4" Margin="12,90,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable General Tips and Ads" />
-        <CheckBox x:Name="cb5" Margin="12,110,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Finish Setup&quot; Ads" />
-        <CheckBox x:Name="cb6" Margin="12,130,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Welcome Experience&quot; Ads" />
-        <CheckBox x:Name="cb7" Margin="12,150,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Personalized Ads" />
-        <CheckBox x:Name="cb8" Margin="12,170,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Tailored Experiences&quot;" />
-        <CheckBox x:Name="cb9" Margin="12,190,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Start Menu Ads" />
+        <CheckBox x:Name="cb1"  Margin="8,32,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable File Explorer Ads" />
+        <CheckBox x:Name="cb2"  Margin="8,52,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable Lock Screen Tips and Ads" />
+        <CheckBox x:Name="cb3"  Margin="8,72,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable Settings Ads" />
+        <CheckBox x:Name="cb4"  Margin="8,92,0,0"  Checked="Checked" Unchecked="Unchecked" Content="Disable General Tips and Ads" /> 
+        <CheckBox x:Name="cb5"  Margin="8,112,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Finish Setup&quot; Ads" />
+        <CheckBox x:Name="cb6"  Margin="8,132,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Welcome Experience&quot; Ads" />
+        <CheckBox x:Name="cb7"  Margin="8,152,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Personalized Ads" />
+        <CheckBox x:Name="cb8"  Margin="8,172,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Tailored Experiences&quot;" />
+        <CheckBox x:Name="cb9"  Margin="8,192,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Start Menu Ads" />
+        <CheckBox x:Name="cb10" Margin="8,212,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Notification Suggestions&quot;" />
 
-        <TextBlock Foreground="Gray" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Bottom" TextAlignment="Left" Margin="0,0,8,5" TextWrapping="Wrap" Text="v0.3"/>
-        <TextBlock Foreground="#FFAAAA" Width="210" Margin="13,210,0,0" TextWrapping="Wrap" Text="*You may need to restart your PC for changes to apply!"/>
+        <Rectangle HorizontalAlignment="Stretch" Margin="8,234,8,0" Fill="Gray" Height="0.9" VerticalAlignment="Top" />
+        <TextBlock Foreground="#F5C2E7" Width="210" Margin="9,240,0,0" Text="These require running as admin."/>
 
-        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left" Width="10" Margin="0,0,0,0" Height="250">
-            <Rectangle Width="10" Height="50">
-                <Rectangle.Fill>
-                    <LinearGradientBrush StartPoint="0.0,0.0" EndPoint="1.0,0.0">
-                        <LinearGradientBrush.GradientStops>
-                            <GradientStop Offset="0.8" Color="#00000000"/>
-                            <GradientStop Offset="0.0" Color="LightBlue"/>
-                        </LinearGradientBrush.GradientStops>
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
-            <Rectangle Width="10" Height="50">
-                <Rectangle.Fill>
-                    <LinearGradientBrush StartPoint="0.0,0.0" EndPoint="1.0,0.0">
-                        <LinearGradientBrush.GradientStops>
-                            <GradientStop Offset="0.8" Color="#00000000"/>
-                            <GradientStop Offset="0.0" Color="Pink"/>
-                        </LinearGradientBrush.GradientStops>
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
-            <Rectangle Width="10" Height="50">
-                <Rectangle.Fill>
-                    <LinearGradientBrush StartPoint="0.0,0.0" EndPoint="1.0,0.0">
-                        <LinearGradientBrush.GradientStops>
-                            <GradientStop Offset="0.8" Color="#00000000"/>
-                            <GradientStop Offset="0.0" Color="White"/>
-                        </LinearGradientBrush.GradientStops>
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
-            <Rectangle Width="10" Height="50">
-                <Rectangle.Fill>
-                    <LinearGradientBrush StartPoint="0.0,0.0" EndPoint="1.0,0.0">
-                        <LinearGradientBrush.GradientStops>
-                            <GradientStop Offset="0.8" Color="#00000000"/>
-                            <GradientStop Offset="0.0" Color="Pink"/>
-                        </LinearGradientBrush.GradientStops>
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
-            <Rectangle Width="10" Height="50">
-                <Rectangle.Fill>
-                    <LinearGradientBrush StartPoint="0.0,0.0" EndPoint="1.0,0.0">
-                        <LinearGradientBrush.GradientStops>
-                            <GradientStop Offset="0.8" Color="#00000000"/>
-                            <GradientStop Offset="0.0" Color="LightBlue"/>
-                        </LinearGradientBrush.GradientStops>
-                    </LinearGradientBrush>
-                </Rectangle.Fill>
-            </Rectangle>
-        </StackPanel>
+        <CheckBox x:Name="cb11" Margin="8,262,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Bing Results In Search" />
+        <CheckBox x:Name="cb12" Margin="8,282,0,0" Checked="Checked" Unchecked="Unchecked" Padding="4,-1,10,23"  Content="Disable Edge Search Bar Widget" />
+
+        <TextBlock Foreground="Gray" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Bottom" TextAlignment="Left" Margin="0,0,8,5" TextWrapping="Wrap" Text="v0.4"/>
     </Grid>
 </Window>
