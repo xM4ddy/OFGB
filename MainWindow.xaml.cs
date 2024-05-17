@@ -120,8 +120,6 @@ namespace OFGB
 
         private static void ToggleOptions(string checkboxName, bool enable)
         {
-            int value = Convert.ToInt32(!enable);
-
             switch (checkboxName)
             {
                 case "cb1":
@@ -158,7 +156,7 @@ namespace OFGB
                     Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Notifications\\Settings\\Windows.ActionCenter.SmartOptOut", "Enabled", Convert.ToInt32(!enable));
                     break;
                 case "cb11":
-                    Registry.SetValue("HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows\\Explorer", "DisableSearchBoxSuggestions", Convert.ToInt32(enable)); // Inverted
+                    Registry.SetValue("HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows\\Explorer", "DisableSearchBoxSuggestions", Convert.ToInt32(enable)); // <- Inverted
                     Registry.SetValue("HKEY_CURRENT_USER\\" + cur_ver + "Search", "BingSearchEnabled", Convert.ToInt32(!enable));
                     break;
                 case "cb12":
