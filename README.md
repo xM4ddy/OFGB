@@ -13,7 +13,7 @@ On April 23, 2024, Microsoft released an [update](https://support.microsoft.com/
 To download the latest version of OFGB, [click here](https://github.com/xM4ddy/OFGB/releases/latest) or click the "Releases" tab at the right of the page.
 
 ## Building
-To build OFGB, you will need [Visual Studio](https://visualstudio.microsoft.com/) and the [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0).
+To build OFGB, you will need [Visual Studio](https://visualstudio.microsoft.com/) and the [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0).
 
 1. Clone/download the repository, either with `git clone https://github.com/xM4ddy/OFGB` or by downloading the ZIP file.
 2. Open the solution file in Visual Studio.
