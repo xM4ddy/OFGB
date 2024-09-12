@@ -94,7 +94,7 @@ namespace OFGB
         private static bool CreateKey(string loc, string key)
         {
             RegistryKey? keyRef;
-            int value;
+            bool value;
 
             if (Registry.CurrentUser.OpenSubKey(loc, true) is not null)
             {
@@ -112,10 +112,10 @@ namespace OFGB
                 throw new InvalidOperationException("OFGB: Failed to create subkey during initialization!");
             }
 
-            value = Convert.ToInt32(keyRef.GetValue(key));
+            value = Convert.ToBoolean(keyRef.GetValue(key));
             keyRef.Close();
 
-            return !(value != 0);
+            return value;
         }
 
         private static void ToggleOptions(string checkboxName, bool enable)
