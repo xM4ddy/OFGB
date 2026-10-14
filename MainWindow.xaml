@@ -31,12 +31,17 @@
         <CheckBox x:Name="cb8"  Margin="8,172,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Tailored Experiences&quot;" />
         <CheckBox x:Name="cb9"  Margin="8,192,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Start Menu Ads" />
         <CheckBox x:Name="cb10" Margin="8,212,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable &quot;Notification Suggestions&quot;" />
+        <CheckBox x:Name="cb13" Margin="8,232,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Search Highlights" />
+        <CheckBox x:Name="cb14" Margin="8,252,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Shared Experiences Ads" />
+        <CheckBox x:Name="cb15" Margin="8,272,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Account Notifications In Start" />
+        <CheckBox x:Name="cb16" Margin="8,292,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Start Menu Suggestions" />
 
-        <Rectangle HorizontalAlignment="Stretch" Margin="8,234,8,0" Fill="Gray" Height="0.9" VerticalAlignment="Top" />
-        <TextBlock Foreground="#F5C2E7" Width="210" Margin="9,240,0,0" Text="These require running as admin."/>
+        <Rectangle HorizontalAlignment="Stretch" Margin="8,314,8,0" Fill="Gray" Height="0.9" VerticalAlignment="Top" />
+        <TextBlock Foreground="#F5C2E7" Width="210" Margin="9,320,0,0" Text="These require running as admin."/>
 
-        <CheckBox x:Name="cb11" Margin="8,262,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Bing Results In Search" />
-        <CheckBox x:Name="cb12" Margin="8,282,0,0" Checked="Checked" Unchecked="Unchecked" Padding="4,-1,10,23"  Content="Disable Edge Search Bar Widget" />
+        <CheckBox x:Name="cb11" Margin="8,342,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Bing Results In Search" />
+        <CheckBox x:Name="cb12" Margin="8,362,0,0" Checked="Checked" Unchecked="Unchecked" Content="Disable Edge Search Bar Widget" />
+        <CheckBox x:Name="cb17" Margin="8,382,0,0" Checked="Checked" Unchecked="Unchecked" Padding="4,-1,10,23" Content="Disable Legacy Windows Copilot" />
 
         <TextBlock Foreground="Gray" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Bottom" TextAlignment="Left" Margin="0,0,8,5" TextWrapping="Wrap" Text="v0.4"/>
     </Grid>
